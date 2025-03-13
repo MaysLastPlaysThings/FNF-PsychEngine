@@ -41,7 +41,6 @@ jobs:
 
       - name: Installing Libraries
         run: |
-          haxelib setup ~/haxelib
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
           haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp

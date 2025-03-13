@@ -21,6 +21,10 @@ import sys.io.*;
 import js.html.*;
 #end
 
+//Mobile
+import mobile.utils.MobileUtil;
+import mobile.backend.TouchInput;
+
 import backend.Paths;
 import backend.Controls;
 import backend.CoolUtil;

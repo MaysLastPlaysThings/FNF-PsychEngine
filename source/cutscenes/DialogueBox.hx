@@ -125,6 +125,16 @@ class DialogueBox extends FlxSpriteGroup
 
 	override function update(elapsed:Float)
 	{
+		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || Controls.instance.ACCEPT;
+
+		#if mobile
+		for (touch in FlxG.touches.list) {
+		if (touch.justPressed) {
+		pressedEnter = true;
+	     }
+		}
+		#end
+
 		// HARD CODING CUZ IM STUPDI
 		super.update(elapsed);
 
@@ -150,7 +160,7 @@ class DialogueBox extends FlxSpriteGroup
 			dialogueStarted = true;
 		}
 
-		if(Controls.instance.BACK)
+		if(Controls.instance.BACK #if mobile || TouchInput.BACK() #end)
 		{
 			if (dialogueStarted && !isEnding)
 			{
@@ -158,7 +168,7 @@ class DialogueBox extends FlxSpriteGroup
 				FlxG.sound.play(Paths.sound('clickText'), 0.8);
 			}
 		}
-		else if(Controls.instance.ACCEPT)
+		else if(pressedEnter)
 		{
 			if (dialogueEnded)
 			{

@@ -20,16 +20,16 @@
 	
 	<!-- ______________________ PSYCH ENGINE CUSTOMIZATION ______________________ -->
 
-	<define name="MODS_ALLOWED" if="desktop" />
-	<define name="HSCRIPT_ALLOWED" if="desktop" />
-	<define name="LUA_ALLOWED" if="desktop" />
+	<define name="MODS_ALLOWED" if="desktop || mobile" />
+	<define name="HSCRIPT_ALLOWED" if="desktop || mobile" />
+	<define name="LUA_ALLOWED" if="desktop || mobile" />
 	<define name="ACHIEVEMENTS_ALLOWED" />
-	<define name="DISCORD_ALLOWED" />
+	<define name="DISCORD_ALLOWED" if="desktop" />
 	<define name="TRANSLATIONS_ALLOWED" />
 	<define name="IRIS_DEBUG"/>
 	
 	<define name="MULTITHREADED_LOADING" /> <!-- UNCOMMENTING THIS LINE WILL ENABLE MULTITHREADED LOADING, WHICH IMPROVES LOADING TIMES, BUT WITH A LOW CHANCE FOR THE GAME FREEZE ON SONG LOAD -->
-	<define name="SHOW_LOADING_SCREEN" />
+	<define name="SHOW_LOADING_SCREEN"/>
 	<define name="PSYCH_WATERMARKS"/> <!-- DELETE THIS TO REMOVE THE PSYCH LOGO FROM LOADING SCREEN -->
 
 	<section if="officialBuild">
@@ -50,7 +50,7 @@
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" vsync="false"/>
 
 	<!--Mobile-specific-->
-	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/>
+	<window if="mobile" orientation="landscape" fullscreen="true" resizable="false"/>
 
 	<!--Switch-specific-->
 	<window if="switch" orientation="landscape" fullscreen="true" width="0" height="0" resizable="true" />
@@ -66,7 +66,7 @@
 	<!-- __________________________ Game Assets & Etc. __________________________ -->
 	
 	<!-- Turn on Crash Handler -->
-	<define name="CRASH_HANDLER" if="desktop release" />
+	<define name="CRASH_HANDLER" if="desktop release || mobile" />
 
 	<!-- Assets -->
 	<assets path="assets/fonts" />
@@ -123,6 +123,7 @@
 	<haxelib name="hxvlc" if="VIDEOS_ALLOWED" version="2.0.1"/>
 	<haxelib name="hxdiscord_rpc" version="1.2.4" if="DISCORD_ALLOWED"/>
 	<haxelib name="flxanimate"/>
+	<haxelib name="extension-androidtools" if="android" />
 
 	<!-- Disable Discord IO Thread -->
 	<haxedef name="DISCORD_DISABLE_IO_THREAD" if="hxdiscord_rpc" />

@@ -70,6 +70,10 @@ class TitleState extends MusicBeatState
 		super.create();
 		Paths.clearUnusedMemory();
 
+        #if android
+		FlxG.android.preventDefaultKeys = [BACK];
+		#end
+
 		if(!initialized)
 		{
 			ClientPrefs.loadPrefs();

@@ -156,6 +156,17 @@ class DialogueBoxPsych extends FlxSpriteGroup
 	public var closeVolume:Float = 1;
 	override function update(elapsed:Float)
 	{
+		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || Controls.instance.ACCEPT;
+
+		#if mobile
+		for (touch in FlxG.touches.list)
+		{
+		if (touch.justPressed) {
+			pressedEnter = true;
+		}
+	   }
+	    #end
+
 		if(ignoreThisFrame) {
 			ignoreThisFrame = false;
 			super.update(elapsed);
@@ -167,7 +178,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 			if(bgFade.alpha > 0.5) bgFade.alpha = 0.5;
 
 			var back:Bool = Controls.instance.BACK;
-			if(Controls.instance.ACCEPT || back) {
+			if(pressedEnter || back) {
 				if(!daText.finishedText && !back)
 				{
 					daText.finishText();

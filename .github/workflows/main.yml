@@ -43,7 +43,7 @@ jobs:
         run: |
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
-          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
+          haxelib run lime rebuild hxcpp
 
       - name: Configure Android
         run: |

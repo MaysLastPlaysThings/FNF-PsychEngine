@@ -24,7 +24,7 @@ class MobileUtil {
 
   public static function getDirectory():String {
    #if android
-   currentDirectory = Path.addTrailingSlash(Environment.getExternalStorageDirectory() + '/.' + Application.current.meta.get('file'));
+   currentDirectory = Environment.getExternalStorageDirectory() + '/.' + Application.current.meta.get('file');
    #elseif ios
    currentDirectory = System.applicationStorageDirectory;
    #end

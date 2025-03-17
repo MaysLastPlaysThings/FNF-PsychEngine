@@ -15,7 +15,7 @@ import sys.FileSystem;
 
 /** 
 * @author MaysLastPlay, MarioMaster (MasterX-39)
-* @version: 0.1.2
+* @version: 0.1.3
 **/
 
 class MobileUtil {
@@ -57,5 +57,12 @@ class MobileUtil {
       FileSystem.createDirectory(path);
     }
   }
+   public static function save(fileName:String):String
+   {
+    if (!FileSystem.exists('saved-content'))
+    FileSystem.createDrectory('saved-content');
+    
+    File.saveContent(MobileUtil.getDirectory() + 'saved-content/' + fileName);
+   }
   #end
 }

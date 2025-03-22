@@ -13,6 +13,8 @@ import lime.system.System;
 import lime.app.Application;
 import sys.FileSystem;
 
+using StringTools;
+
 /** 
 * @author MaysLastPlay, MarioMaster (MasterX-39)
 * @version: 0.1.3

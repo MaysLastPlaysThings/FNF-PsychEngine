@@ -3590,9 +3590,13 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				upperBox.isMinimized = true;
 	
 				updateChartData();
+		    #if mobile
+		    MobileUtil.save('events.json', PsychJsonPrinter.print({events: PlayState.SONG.events, format: 'psych_v1'}, ['events']));
+		    #else
 				fileDialog.save('events.json', PsychJsonPrinter.print({events: PlayState.SONG.events, format: 'psych_v1'}, ['events']),
 					function() showOutput('Events saved successfully to: ${fileDialog.path}'), null,
 					function() showOutput('Error on saving events!', true));
+					#end
 			}, btnWid);
 			btn.text.alignment = LEFT;
 			tab_group.add(btn);
@@ -4593,13 +4597,21 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		var chartData:String = PsychJsonPrinter.print(PlayState.SONG, ['sectionNotes', 'events']);
 		if(canQuickSave && Song.chartPath != null)
 		{
+		  #if mobile
+			var chartName:String = Paths.formatToSongPath(PlayState.SONG.song) + '.json';
+			MobileUtil.save(chartName, chartData);
+			#else
 			File.saveContent(Song.chartPath, chartData);
 			showOutput('Chart saved successfully to: ${Song.chartPath}');
+			#end
 		}
 		else
 		{
 			var chartName:String = Paths.formatToSongPath(PlayState.SONG.song) + '.json';
 			if(Song.chartPath != null) chartName = Song.chartPath.substr(Song.chartPath.lastIndexOf('/')).trim();
+			#if mobile
+			MobileUtil.save(chartName, chartData);
+			#else
 			fileDialog.save(chartName, chartData,
 				function()
 				{
@@ -4609,6 +4621,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 					showOutput('Chart saved successfully to: $newPath');
 
 				}, null, function() showOutput('Error on saving chart!', true));
+				#end
 		}
 	}
 	

@@ -57,12 +57,13 @@ class MobileUtil {
      System.exit(0);
     }
   }
-   public static function save(fileName:String = 'Ye', fileExt:String = '.json', fileData:String = 'you didnt cooked, try again!'):String
-   {
-    if (!FileSystem.exists('saved-content'))
-    FileSystem.createDirectory('saved-content');
-    
-    File.saveContent(MobileUtil.getDirectory() + 'saved-content/' + fileName + fileExt + fileData);
-   }
+
+	public static function save(fileName:String = 'Ye', fileExt:String = '.json', fileData:String = 'you didnt cooked, try again!')
+	{
+		if (!FileSystem.exists(MobileUtil.getDirectory() + 'saved-content'))
+			FileSystem.createDirectory(MobileUtil.getDirectory() + 'saved-content');
+
+		File.saveContent(MobileUtil.getDirectory() + 'saved-content/' + fileName + fileExtension, fileData);
+	}
   #end
 }

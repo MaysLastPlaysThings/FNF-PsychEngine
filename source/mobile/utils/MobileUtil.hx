@@ -58,7 +58,7 @@ class MobileUtil {
    public static function save(fileName:String = 'Ye', fileExt:String = '.json', fileData:String = 'you didnt cooked, try again!'):String
    {
     if (!FileSystem.exists('saved-content'))
-    FileSystem.createDrectory('saved-content');
+    FileSystem.createDirectory('saved-content');
     
     File.saveContent(MobileUtil.getDirectory() + 'saved-content/' + fileName + fileExt + fileData);
    }

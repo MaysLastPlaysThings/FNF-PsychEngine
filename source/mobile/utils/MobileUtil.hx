@@ -55,12 +55,12 @@ class MobileUtil {
      System.exit(0);
     }
   }
-   public static function save(fileName:String):String
+   public static function save(fileName:String = 'Ye', fileExt:String = '.json', fileData:String = 'you didnt cooked, try again!'):String
    {
     if (!FileSystem.exists('saved-content'))
     FileSystem.createDrectory('saved-content');
     
-    File.saveContent(MobileUtil.getDirectory() + 'saved-content/' + fileName);
+    File.saveContent(MobileUtil.getDirectory() + 'saved-content/' + fileName + fileExt + fileData);
    }
   #end
 }

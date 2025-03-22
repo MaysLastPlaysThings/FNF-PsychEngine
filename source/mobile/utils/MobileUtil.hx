@@ -63,7 +63,7 @@ class MobileUtil {
 		if (!FileSystem.exists(MobileUtil.getDirectory() + 'saved-content'))
 			FileSystem.createDirectory(MobileUtil.getDirectory() + 'saved-content');
 
-		File.saveContent(MobileUtil.getDirectory() + 'saved-content/' + fileName + fileExtension, fileData);
+		File.saveContent(MobileUtil.getDirectory() + 'saved-content/' + fileName + fileExt, fileData);
 	}
   #end
 }

@@ -1304,11 +1304,15 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 
 		if (data.length > 0)
 		{
+		  #if mobile
+		  MobileUtil.save(data, '$_char.json');
+		  #else
 			_file = new FileReference();
 			_file.addEventListener(#if desktop Event.SELECT #else Event.COMPLETE #end, onSaveComplete);
 			_file.addEventListener(Event.CANCEL, onSaveCancel);
 			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 			_file.save(data, '$_char.json');
+			#end
 		}
 	}
 }

@@ -1607,11 +1607,15 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 		var data = haxe.Json.stringify(stageJson, '\t');
 		if (data.length > 0)
 		{
+		  #if mobile
+			MobileUtil.save(data, '$lastLoadedStage.json');	  
+		  #else
 			_file = new FileReference();
 			_file.addEventListener(#if desktop Event.SELECT #else Event.COMPLETE #end, onSaveComplete);
 			_file.addEventListener(Event.CANCEL, onSaveCancel);
 			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 			_file.save(data, '$lastLoadedStage.json');
+			#end
 		}
 	}
 

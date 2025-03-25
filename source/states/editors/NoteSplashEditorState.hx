@@ -774,11 +774,15 @@ class NoteSplashEditorState extends MusicBeatState
         var data:String = Json.stringify(config, "\t");
         if (data.length > 0)
         {
+            #if mobile
+            MobileUtil.save(data, imageSkin + ".json");
+            #else
             _file = new FileReference();
             _file.addEventListener(Event.COMPLETE, onSaveComplete);
             _file.addEventListener(Event.CANCEL, onSaveCancel);
             _file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
             _file.save(data, imageSkin + ".json");
+            #end
         }
     }
 
@@ -812,11 +816,15 @@ class NoteSplashEditorState extends MusicBeatState
             }
 
             var conf = parseTxt(txt);
+            #if mobile
+            MobileUtil.save(Json.stringify(conf, "\t"), file);
+            #else
             _file = new FileReference();
             _file.addEventListener(Event.COMPLETE, onSaveComplete);
             _file.addEventListener(Event.CANCEL, onSaveCancel);
             _file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
             _file.save(Json.stringify(conf, "\t"), file);
+            #end
             #end
         }
         catch (e)

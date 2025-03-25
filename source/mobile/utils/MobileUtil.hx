@@ -13,25 +13,22 @@ import lime.system.System;
 import lime.app.Application;
 import sys.FileSystem;
 
+using StringTools;
+
 /** 
 * @author MaysLastPlay, MarioMaster (MasterX-39)
-* @version: 0.1.2
+* @version: 0.1.3
 **/
 
 class MobileUtil {
   public static var currentDirectory:String = null;
   public static var path:String = '';
 
-  public static var no_storage:String = System.applicationStorageDirectory;
-  #if android
-  public static var external:String = Environment.getExternalStorageDirectory() + '/.' + Application.current.meta.get('file');
-  #end
-
   public static function getDirectory():String {
    #if android
-   currentDirectory = external;
+   currentDirectory = Environment.getExternalStorageDirectory() + '/.' + Application.current.meta.get('file');
    #elseif ios
-   currentDirectory = no_storage;
+   currentDirectory = System.applicationStorageDirectory;
    #end
   return currentDirectory;
   }
@@ -56,11 +53,17 @@ class MobileUtil {
         FileSystem.createDirectory(MobileUtil.getDirectory());
      } catch (e:Dynamic) {
     trace(e);
-    Application.current.window.alert("Seems like you use No Storage Mode.\n If you want to use other modes, check options!", 'Uncaught Error');
-    currentDirectory = no_storage;
-     path = Path.addTrailingSlash(currentDirectory);
-      FileSystem.createDirectory(path);
+    Application.current.window.alert("Seems like you didnt accepted the Permissions. Please accept them to be able to run the game.", 'Uncaught Error');
+     System.exit(0);
     }
   }
+
+	public static function save(fileName:String = 'Ye', fileExt:String = '.json', fileData:String = 'you didnt cooked, try again!')
+	{
+		if (!FileSystem.exists(MobileUtil.getDirectory() + 'saved-content'))
+			FileSystem.createDirectory(MobileUtil.getDirectory() + 'saved-content');
+
+		File.saveContent(MobileUtil.getDirectory() + 'saved-content/' + fileName + fileExt, fileData);
+	}
   #end
 }
